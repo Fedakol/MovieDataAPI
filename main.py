@@ -33,13 +33,12 @@ async def root():
 async def get_list(q: list | None = Query()):
     film_list = []
     for id in q:
-        with tracer.start_as_current_span("kinopoisk_get_movie_data"):
-            r = requests.get(
-                f"https://kinopoiskapiunofficial.tech/api/v2.2/films/{id}",
-                headers={"X-API-KEY": "700211e1-f970-499f-9957-6bca24e2adb1"},
-            )
-            print(r.json())
-            film_list.append(r.json())
+        r = requests.get(
+            f"https://kinopoiskapiunofficial.tech/api/v2.2/films/{id}",
+            headers={"X-API-KEY": "700211e1-f970-499f-9957-6bca24e2adb1"},
+        )
+        print(r.json())
+        film_list.append(r.json())
     return film_list
 
 
